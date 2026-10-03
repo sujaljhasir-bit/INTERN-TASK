@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scholarship Dashboard | K12 Hunar CRM Demo</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo-mark">K12</span>
+    <span class="logo-text">Hunar<small>scholarship crm</small></span>
+  </div>
+  <svg class="menu-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+  <span class="role">Employee view</span>
+</header>
+
+<div class="shell">
+  <nav class="sidebar" aria-label="Sections">
+    <a href="#top" title="Dashboard" aria-label="Dashboard">
+      <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg>
+    </a>
+    <a href="#states" title="States" aria-label="States">
+      <svg viewBox="0 0 24 24" width="26" height="26"><path fill-rule="evenodd" d="M3 3h11v18H3zM14 8h7v13h-7zM5 6h2v2H5zm4 0h2v2H9zm-4 4h2v2H5zm4 0h2v2H9zm-4 4h2v2H5zm4 0h2v2H9z"/></svg>
+    </a>
+    <a href="#records" title="Scholarship records" aria-label="Scholarship records">
+      <svg viewBox="0 0 24 24" width="26" height="26"><path fill-rule="evenodd" d="M5 3h13a1 1 0 0 1 1 1v14H7a2 2 0 0 0-2 2zm3 3v8h8V6z"/></svg>
+    </a>
+  </nav>
+
+  <main class="page" id="top">
+    <section class="hero">
+      <h1>Scholarship Dashboard</h1>
+      <p class="hero-sub">Review, update and publish scholarships for students in Bihar, Haryana and Jharkhand.</p>
+      <p class="selected">Selected state <strong id="selectedState">All states</strong></p>
+    </section>
+
+    <div class="top-grid" id="states">
+      <section class="summary" id="summary" aria-label="Scholarship summary"></section>
+      <section class="state-list" id="stateList" aria-label="Scholarships by state"></section>
+    </div>
+
+    <section class="panel" id="records">
+      <h2 class="panel-title">Scholarship records</h2>
+      <div class="tabs" id="stateTabs" role="tablist" aria-label="Filter by state"></div>
+      <div class="toolbar">
+        <div class="field inline">
+          <label for="statusFilter">Status</label>
+          <select id="statusFilter">
+            <option value="All">All statuses</option>
+            <option>Published</option>
+            <option>Draft</option>
+            <option>Expired</option>
+          </select>
+        </div>
+        <p class="count" id="count" aria-live="polite"></p>
+        <button type="button" class="btn btn-primary" id="addBtn">+ Add Scholarship</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Scholarship</th>
+              <th>State</th>
+              <th>Class</th>
+              <th>Deadline</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <p class="empty" id="empty" hidden>No scholarships match these filters. Change the state or status to see more.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="formDialog" aria-labelledby="formTitle">
+  <form id="form" novalidate>
+    <div class="dialog-head">
+      <h2 id="formTitle">Add Scholarship</h2>
+      <button type="button" class="icon-btn" data-close="formDialog" aria-label="Close">&times;</button>
+    </div>
+    <div class="grid">
+      <div class="field full">
+        <label for="f-name">Scholarship name *</label>
+        <input id="f-name" name="name" type="text" autocomplete="off">
+        <span class="error" data-error="name"></span>
+      </div>
+      <div class="field">
+        <label for="f-state">State *</label>
+        <select id="f-state" name="state">
+          <option value="">Select state</option>
+          <option>Bihar</option>
+          <option>Haryana</option>
+          <option>Jharkhand</option>
+        </select>
+        <span class="error" data-error="state"></span>
+      </div>
+      <div class="field">
+        <label for="f-provider">Provider name *</label>
+        <input id="f-provider" name="provider" type="text" autocomplete="off">
+        <span class="error" data-error="provider"></span>
+      </div>
+      <div class="field">
+        <label for="f-class">Applicable class *</label>
+        <input id="f-class" name="classRange" type="text" placeholder="e.g. Class 9-10" autocomplete="off">
+        <span class="error" data-error="classRange"></span>
+      </div>
+      <div class="field">
+        <label for="f-deadline">Application deadline</label>
+        <input id="f-deadline" name="deadline" type="date">
+        <span class="hint">Leave empty if not stated.</span>
+      </div>
+      <div class="field full">
+        <label for="f-eligibility">Eligibility criteria</label>
+        <textarea id="f-eligibility" name="eligibility" rows="3"></textarea>
+      </div>
+      <div class="field full">
+        <label for="f-benefit">Scholarship amount or benefit</label>
+        <input id="f-benefit" name="benefit" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-link">Official application link</label>
+        <input id="f-link" name="link" type="url" placeholder="https://" autocomplete="off">
+        <span class="error" data-error="link"></span>
+      </div>
+      <div class="field">
+        <label for="f-status">Status *</label>
+        <select id="f-status" name="status">
+          <option>Draft</option>
+          <option>Published</option>
+          <option>Expired</option>
+        </select>
+      </div>
+    </div>
+    <div class="dialog-foot">
+      <button type="button" class="btn" data-close="formDialog">Cancel</button>
+      <button type="button" class="btn" id="formPreview">Preview</button>
+      <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="previewDialog" aria-labelledby="previewTitle">
+  <div class="dialog-head">
+    <h2>Student view</h2>
+    <button type="button" class="icon-btn" data-close="previewDialog" aria-label="Close">&times;</button>
+  </div>
+  <div id="previewBody"></div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
