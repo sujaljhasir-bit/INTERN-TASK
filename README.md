@@ -1,5 +1,4 @@
 # Scholarship CRM Demo
-
 A small frontend demo of a Scholarship Management CRM for K12 Hunar. It is built with plain HTML, CSS and JavaScript. There is no backend, no login and no build step.
 
 ## Run the project
@@ -8,9 +7,7 @@ Option 1: open `index.html` in any modern browser (Chrome, Edge, Firefox, Safari
 
 Option 2: serve the folder locally:
 
-```
 python3 -m http.server 8000
-```
 
 Then open http://localhost:8000.
 
@@ -26,7 +23,6 @@ Then open http://localhost:8000.
 
 ## Project structure
 
-```
 index.html        page markup, form and dialogs
 css/styles.css    layout, theme and mobile styles
 images/           photos used in the header banner and the student preview
