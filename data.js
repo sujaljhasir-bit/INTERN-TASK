@@ -1,5 +1,6 @@
 const NOT_SPECIFIED = "Not specified";
 
+
 const SCHOLARSHIPS = [
   { id: 1, state: "Bihar", name: "Post-Matric Scholarship BC EBC", classRange: "Class 11-12", deadline: "2026-09-30", status: "Published" },
   { id: 2, state: "Bihar", name: "Post-Matric Scholarship SC ST", classRange: "Class 11-12", deadline: "2026-09-30", status: "Draft" },
